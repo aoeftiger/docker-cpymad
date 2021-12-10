@@ -1,12 +1,16 @@
 # docker-cpymad
-Beam Dynamics: repository with cpymad and MAD-X configuration for running jupyter notebooks *inside a docker container* e.g. on binder
+Beam dynamics repository with `cpymad` and `MAD-X` configuration for running jupyter notebooks, locally inside a docker container or on [mybinder.org](https://mybinder.org/).
 
-## How to build the docker container
+Launch an interactive binder instance here:
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/aoeftiger/docker-cpymad/HEAD)
+
+## Building locally
 The docker container can be built locally by running on the command line
 
     docker build -t aoeftiger/docker-cpymad .
 
-## How to run the docker container
+## Running locally
 The docker container can be run on the command line via
 
     JUPYTER_TOKEN=madx docker run -p 8888:8888 -e JUPYTER_TOKEN -v $HOME:/home/jovyan/src/notebooks/home/ aoeftiger/docker-cpymad
