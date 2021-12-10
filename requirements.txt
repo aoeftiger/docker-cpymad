@@ -1,0 +1,5 @@
+numpy
+scipy
+matplotlib
+seaborn
+cpymad ==1.9.1 --only-binary cpymad
