@@ -1,4 +1,4 @@
-FROM jupyter/minimal-notebook:2021-11-20
+FROM quay.io/jupyter/minimal-notebook:2024-01-29
 
 RUN mkdir src
 WORKDIR src/
