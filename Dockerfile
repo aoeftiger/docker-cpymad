@@ -1,17 +1,12 @@
 FROM quay.io/jupyter/minimal-notebook:2024-01-29
 
-RUN mkdir src
-WORKDIR src/
-COPY Dockerfile  LICENSE  notebooks  README.md  requirements.txt ./
+COPY --chown=${NB_UID}:${NB_GID} requirements.txt /tmp/
+RUN pip install --no-cache-dir --requirement /tmp/requirements.txt && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
 
-USER root
-USE chown 1000 -R .
-
+COPY --chown=${NB_UID}:${NB_GID} notebooks/ ./
 USER jovyan
-
-RUN pip install -r requirements.txt --no-cache-dir
-
-WORKDIR notebooks
 
 # avoid mixing output from C and Fortran code when using cpymad:
 ENV GFORTRAN_UNBUFFERED_PRECONNECTED=y 
