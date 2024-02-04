@@ -2,13 +2,14 @@ FROM quay.io/jupyter/minimal-notebook:2024-01-29
 
 RUN mkdir src
 WORKDIR src/
-COPY . .
+COPY Dockerfile  LICENSE  notebooks  README.md  requirements.txt ./
 
 USER root
-RUN chown -R 1000 .
+USE chown 1000 -R .
+
 USER jovyan
 
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt --no-cache-dir
 
 WORKDIR notebooks
 
