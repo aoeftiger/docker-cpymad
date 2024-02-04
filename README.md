@@ -12,7 +12,7 @@ The published docker image is found here:
 ## Running the container
 The docker container can be run on the command line via
 
-    JUPYTER_TOKEN=madx docker run -p 8888:8888 -e JUPYTER_TOKEN -v $HOME:/home/jovyan/src/notebooks/home/ aoeftiger/docker-cpymad
+    JUPYTER_TOKEN=madx docker run -p 8888:8888 -e JUPYTER_TOKEN -e CHOWN_HOME=yes -e CHOWN_HOME_OPTS='-R' -v $HOME:/home/jovyan/home/ aoeftiger/docker-cpymad
 
 where
 
@@ -26,3 +26,15 @@ Next you can open your browser and load the page [https://localhost:8888/?token=
 The docker container for this repository can be built locally by running on the command line
 
     docker build -t aoeftiger/docker-cpymad .
+
+## Troubleshooting
+If you face permission issues with accessing your home directory from within the container, you might want to provide your user ID and group ID explicitly to the container as a solution.
+
+On linux, check your user and group IDs via the CLI command `$ id` and use these values when running the container as above but with the additional arguments:
+
+    [...] --user root -e NB_UID=<your user id> -e NB_GID=<your group id> [...]
+
+Add these comments before the mount instruction `-v [...]`.
+
+For further information, follow [the guide on jupyter-docker-stacks.readthedocs.io](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/troubleshooting.html#permission-denied-when-mounting-volumes), see specifically the second point under "Some things to try".
+
