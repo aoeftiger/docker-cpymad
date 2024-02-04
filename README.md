@@ -18,7 +18,7 @@ where
 
  - `JUPYTER_TOKEN=madx` sets the token (password) for entering the jupyter server
  - `-p 8888:8888` forwards the jupyter server port from inside the container to your outside system (change the first port to your liking)
- - `-v $HOME:/home/jovyan/src/notebooks/home` binds your home directory to inside the docker container such that you can save and load notebooks.
+ - `-v $HOME:/home/jovyan/home` binds your home directory to inside the docker container such that you can save and load notebooks.
 
 Next you can open your browser and load the page [https://localhost:8888/?token=madx](https://localhost:8888/?token=madx) to connect to the running jupyter lab server.
 
